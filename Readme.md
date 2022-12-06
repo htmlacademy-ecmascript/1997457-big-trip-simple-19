@@ -1,7 +1,7 @@
 # Проект «Большое путешествие (простой)»
 
-* Студент: [Roman Popov](https://up.htmlacademy.ru/ecmascript/19/user/1997457).
-* Наставник: `Неизвестно`.
+* Студент: [Роман Попов](https://up.htmlacademy.ru/ecmascript/19/user/1997457).
+* Наставник: [Александр Конотоп](https://github.com/sineway).
 
 ---
 
