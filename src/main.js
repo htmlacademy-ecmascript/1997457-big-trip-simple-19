@@ -4,6 +4,8 @@ import NewFilterElementView from './view/filter-element.js';
 import NewFilterFormView from './view/filter-form.js';
 import NewSortFormView from './view/sort-form.js';
 import NewSortElementView from './view/sort-element.js';
+import NewRoutPointView from './view/rout-point.js';
+import NewRoutItemView from './view/rout-item.js';
 
 
 import render from './render.js';
