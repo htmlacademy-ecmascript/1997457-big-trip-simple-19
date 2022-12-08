@@ -1,4 +1,4 @@
-import createElement from '../render.js';
+import {createElement} from '../render.js';
 
 function createNewCreationFormTemplate() {
   return `<form class="event event--edit" action="#" method="post">
