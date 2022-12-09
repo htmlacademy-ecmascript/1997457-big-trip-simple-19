@@ -2,6 +2,7 @@ import {createElement} from '../render.js';
 
 function createNewSortFormTemplate() {
   return `<form class="trip-events__trip-sort  trip-sort" action="#" method="get">
+  <ul class="trip-events__list"></ul>
 </form>`;
 }
 
