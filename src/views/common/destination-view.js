@@ -11,12 +11,6 @@ export default class DestinationView extends View {
   /**
    * @override
    */
-  // method1 () {
-  // предпочтительнее
-  // }
-
-  // method2 = () => {
-  // }
 
   createHtml() {
     return html`
