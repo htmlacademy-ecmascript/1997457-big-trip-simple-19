@@ -11,6 +11,13 @@ export default class DestinationView extends View {
   /**
    * @override
    */
+  // method1 () {
+  // предпочтительнее
+  // }
+
+  // method2 = () => {
+  // }
+
   createHtml() {
     return html`
       <label class="event__label  event__type-output" for="event-destination-1">
