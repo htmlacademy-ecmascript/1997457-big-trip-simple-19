@@ -23,6 +23,12 @@ export default class PointAdapter extends Adapter {
   toJSON() {
     return {
       'base_price': this.basePrice,
+      'date_from': this.startDate,
+      'date_to': this.endDate,
+      'destination': Number(this.destinationId),
+      'id': this.id,
+      'offers': this.offerIds?.map(Number),
+      'type': this.type
     };
   }
 }

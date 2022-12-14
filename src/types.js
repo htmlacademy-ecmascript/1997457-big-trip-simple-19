@@ -30,7 +30,7 @@
 
 /**
  * @typedef OfferGroup
- * @prop {string} type это идентификатор
+ * @prop {string} type 'это идентификатор'
  * @prop {Offer[]} offers 'items'
  */
 
