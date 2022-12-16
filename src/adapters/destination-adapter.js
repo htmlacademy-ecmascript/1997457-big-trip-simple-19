@@ -1,28 +1,15 @@
 import Adapter from './adapter';
 
-export default class destinationAdapter extends Adapter {
+export default class DestinationAdapter extends Adapter {
   /**
-   * @param {Partial<Destination>} data
+   * @param {Destination} data
    */
-  constructor(data = {}) {
+  constructor(data) {
     super();
 
     this.numberId = String(data.id);
     this.textDescription = data.description;
     this.placeName = data.name;
-    this.placeImage = data.pictures;
-  }
-
-  /**
-   * @override
-   * @return {Partial<Destination>}
-   */
-  toJSON() {
-    return {
-      'id': Number(this.numberId),
-      'description': this.textDescription,
-      'name': this.placeName,
-      'pictures': this.placeImage
-    };
+    this.placeImage = data.pictures.map((item) => ({...item}));
   }
 }

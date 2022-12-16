@@ -1,22 +1,16 @@
 import Adapter from './adapter';
-export default class offerGroupAdapter extends Adapter {
-  /**
-   * @param {Partial<OfferGroup>} data
-   */
-  constructor(data = {}) {
-    super();
-    this.groupId = data.type;
-    this.items = data.offers;
-  }
 
+export default class OfferGroupAdapter extends Adapter {
   /**
-   * @override
-   * @return {Partial<OfferGroup>}
+   * @param {OfferGroup} data
    */
-  toJSON() {
-    return {
-      'offers': this.items,
-      'type': this.groupId
-    };
+  constructor(data) {
+    super();
+
+    this.id = data.type;
+    this.items = data.offers.map((item) => ({
+      ...item,
+      id: String(item.id)
+    }));
   }
 }
