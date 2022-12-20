@@ -56,13 +56,14 @@ Promise.all(
 )
 
   .then(async () => {
-    table(pointsModel.list());
+    // table(pointsModel.list());
 
-    //
-    // const logEvent = (event) => log(event.type, event.detail);
 
-    // pointsModel.addEventListener('add', logEvent);
+    const logEvent = (event) => log(event.type, event.detail);
+
+    pointsModel.addEventListener('add', logEvent);
     // pointsModel.addEventListener('update', logEvent);
+    pointsModel.addEventListener('delete', logEvent);
 
     // const item = pointsModel.item();
 
@@ -79,10 +80,10 @@ Promise.all(
     // addedItem.type = 'taxi';
 
     // await pointsModel.update(addedItem);
-    // await pointsModel.delete('1');
+    await pointsModel.delete(pointsModel.item(0).id);
 
     //
-    // log('Points', pointsModel.listAll());
+    log('Points', pointsModel.listAll());
     // log('Points.item', pointsModel.item(10));
     // log('Points: findById', pointsModel.findById('10'));
     // log('Points: findBy', pointsModel.findBy('basePrice', 400));
