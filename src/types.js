@@ -13,6 +13,12 @@
 /**
  * @template Item
  * @template {Adapter} ItemAdapter
+ * @typedef {import('./models/collection-model').default<Item,ItemAdapter>} CollectionModel
+ */
+
+/**
+ * @template Item
+ * @template {Adapter} ItemAdapter
  * @callback AdaptCallback
  * @param {Item} [item]
  * @return {ItemAdapter}

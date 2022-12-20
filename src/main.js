@@ -58,7 +58,7 @@ Promise.all(
   .then(async () => {
     // table(pointsModel.list());
 
-
+    //
     const logEvent = (event) => log(event.type, event.detail);
 
     pointsModel.addEventListener('add', logEvent);
