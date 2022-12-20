@@ -18,6 +18,7 @@ export default class PointAdapter extends Adapter {
 
   // example
   // get startDateAsNumber() {
+  //   console.log('startDateAsNumber', Number(this.startDate));
   //   return Number(this.startDate);
   // }
 

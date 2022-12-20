@@ -56,31 +56,33 @@ Promise.all(
 )
 
   .then(async () => {
-    // table(pointsModel.list());
+    table(pointsModel.list());
 
-    const logEvent = (event) => log(event.type, event.detail);
+    //
+    // const logEvent = (event) => log(event.type, event.detail);
 
-    pointsModel.addEventListener('add', logEvent);
-    pointsModel.addEventListener('update', logEvent);
+    // pointsModel.addEventListener('add', logEvent);
+    // pointsModel.addEventListener('update', logEvent);
 
-    const item = pointsModel.item();
+    // const item = pointsModel.item();
 
-    item.basePrice = 100;
-    item.startDate = new Date().toJSON();
-    item.endDate = item.startDate;
-    item.destinationId = '1';
-    item.offerIds = [];
-    item.type = 'bus';
+    // item.basePrice = 100;
+    // item.startDate = new Date().toJSON();
+    // item.endDate = item.startDate;
+    // item.destinationId = '1';
+    // item.offerIds = [];
+    // item.type = 'bus';
 
-    const addedItem = await pointsModel.add(item);
+    // const addedItem = await pointsModel.add(item);
 
-    addedItem.basePrice = 200;
-    addedItem.type = 'taxi';
+    // addedItem.basePrice = 200;
+    // addedItem.type = 'taxi';
 
-    await pointsModel.update(addedItem);
-    await pointsModel.delete('1');
+    // await pointsModel.update(addedItem);
+    // await pointsModel.delete('1');
 
-    log('Points', pointsModel.listAll());
+    //
+    // log('Points', pointsModel.listAll());
     // log('Points.item', pointsModel.item(10));
     // log('Points: findById', pointsModel.findById('10'));
     // log('Points: findBy', pointsModel.findBy('basePrice', 400));
