@@ -4,6 +4,7 @@ import './views/sort-view';
 import './views/list-view';
 import './views/point-view';
 import './views/new-point-editor-view';
+import './presenters/list-presenter';
 
 import Store from './store';
 
@@ -14,9 +15,11 @@ import DestinationAdapter from './adapters/destination-adapter';
 
 import {FilterType, SortType} from './enums';
 import {filterCallbackMap, sortCallbackMap} from './maps';
+import ListPresenter from './presenters/list-presenter';
+import ListView from './views/list-view';
 
 const BASE = 'https://19.ecmascript.pages.academy/big-trip-simple';
-const AUTH = 'Basic roma1996';
+const AUTH = 'Basic roma1996sdsdsdsdsdsdsdsd7';
 
 /**
  * @type {Store<Point>}
@@ -49,6 +52,8 @@ const offerGroupsModel = new CollectionModel({
 
 const models = [pointsModel, destinationsModel, offerGroupsModel];
 
+const listView = document.querySelector(String(ListView));
+
 const {log, table} = console;
 
 Promise.all(
@@ -56,41 +61,8 @@ Promise.all(
 )
 
   .then(async () => {
-    table(pointsModel.list());
-
-    //
-    // const logEvent = (event) => log(event.type, event.detail);
-
-    // pointsModel.addEventListener('add', logEvent);
-    // pointsModel.addEventListener('update', logEvent);
-    // pointsModel.addEventListener('delete', logEvent);
-
-    // const item = pointsModel.item();
-
-    // item.basePrice = 100;
-    // item.startDate = new Date().toJSON();
-    // item.endDate = item.startDate;
-    // item.destinationId = '1';
-    // item.offerIds = [];
-    // item.type = 'bus';
-
-    // const addedItem = await pointsModel.add(item);
-
-    // addedItem.basePrice = 200;
-    // addedItem.type = 'taxi';
-
-    // await pointsModel.update(addedItem);
-    // await pointsModel.delete(pointsModel.item(0).id);
-
-    //
-    // log('Points', pointsModel.listAll());
-    // log('Points.item', pointsModel.item(10));
-    // log('Points: findById', pointsModel.findById('10'));
-    // log('Points: findBy', pointsModel.findBy('basePrice', 400));
-    // log('Points: findIndexBy', pointsModel.findIndexBy('basePrice', 300));
-    // log('Points: findIndexById', pointsModel.findIndexById('0'));
-    // log('Destinations', destinationsModel.listAll());
-    // log('Offer groups', offerGroupsModel.listAll());
+    // table(pointsModel.list());
+    new ListPresenter(listView, models);
   })
 
   .catch((error) => {
