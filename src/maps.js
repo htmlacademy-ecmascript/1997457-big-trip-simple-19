@@ -5,27 +5,16 @@ import {FilterType, SortType} from './enums';
  */
 export const filterCallbackMap = {
   [FilterType.EVERYTHING]: () => true,
-  [FilterType.FUTURE]: (point) => {
-    // console.log('point', point);
-    // console.log('pointStartDate', Date.parse(point.startDate));
-    // console.log('datenow',Date.now());
-    if (Number(Date.parse(point.startDate)) <= Number(Date.now())) {
-      return false;
-    }
-    return true;
-  }
+  [FilterType.FUTURE]: (point) => point.endDateAsNumber > Date.now()
 };
 
 /**
  * @type {Record<string,SortCallback<PointAdapter>>}
  */
 export const sortCallbackMap = {
-  [SortType.DAY]: (point, nextPoint) => Number(Date.parse(point.startDate)) - Number(Date.parse(nextPoint.startDate)),
+  [SortType.DAY]: (point, nextPoint) => point.startDateAsNumber - nextPoint.startDateAsNumber,
   [SortType.EVENT]: () => 0,
   [SortType.TIME]: () => 0,
-  [SortType.PRICE]: (point, nextPoint) => {
-    console.log(typeof(nextPoint.basePrice));
-    return nextPoint.basePrice - point.basePrice;
-  },
+  [SortType.PRICE]: (point, nextPoint) => nextPoint.basePrice - point.basePrice,
   [SortType.OFFERS]: () => 0
 };

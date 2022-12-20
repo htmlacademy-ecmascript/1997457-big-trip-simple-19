@@ -16,11 +16,13 @@ export default class PointAdapter extends Adapter {
     this.type = data.type;
   }
 
-  // example
-  // get startDateAsNumber() {
-  //   console.log('startDateAsNumber', Number(this.startDate));
-  //   return Number(this.startDate);
-  // }
+  get startDateAsNumber() {
+    return Date.parse(this.startDate);
+  }
+
+  get endDateAsNumber() {
+    return Date.parse(this.endDate);
+  }
 
   /**
    * @override

@@ -26,7 +26,7 @@ const pointsModel = new CollectionModel({
   store: pointsStore,
   adapt: (item) => new PointAdapter(item),
   filter: filterCallbackMap[FilterType.FUTURE],
-  sort: sortCallbackMap[SortType.DAY]
+  sort: sortCallbackMap[SortType.PRICE]
 });
 
 /**
