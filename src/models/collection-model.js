@@ -163,5 +163,4 @@ export default class CollectionModel extends Model {
 
     return detail;
   }
-
 }

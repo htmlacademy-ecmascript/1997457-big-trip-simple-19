@@ -14,9 +14,9 @@ export default class ListPresenter extends Presenter {
   }
 
   updateView() {
-    this.view.setItems(
-      this.pointsModel.list().map(this.createPointViewState, this)
-    );
+    const points = this.pointsModel.list();
+    const pointsViewStates = points.map(this.createPointViewState, this);
+    this.view.setItems(pointsViewStates);
   }
 
   /**
@@ -26,6 +26,7 @@ export default class ListPresenter extends Presenter {
     const destination = this.destinationsModel.findById(point.destinationId);
     const offerGroup = this.offerGroupsModel.findById(point.type);
     console.log(offerGroup);
+    console.log('point', point.offerIds);
     // TODO: Подставить значения
     return {
       date: formatDate(point.startDate),
@@ -37,6 +38,7 @@ export default class ListPresenter extends Presenter {
       endDate: '',
       basePrice: formatNumber(point.basePrice),
       offers: offerGroup.items
+      // offers: offerGroup.items.map((value) => {})
     };
   }
 }
