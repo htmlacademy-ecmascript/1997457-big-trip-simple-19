@@ -25,9 +25,16 @@ export default class ListPresenter extends Presenter {
   createPointViewState(point) {
     const destination = this.destinationsModel.findById(point.destinationId);
     const offerGroup = this.offerGroupsModel.findById(point.type);
-    console.log(offerGroup);
-    console.log('point', point.offerIds);
-    // TODO: Подставить значения
+
+    const offerViewStates = offerGroup.items
+      .filter((offer) =>
+        point.offerIds.includes(offer.id)
+      )
+      .map((offer) => ({
+        title: offer.title,
+        price: formatNumber(offer.price)
+      }));
+
     return {
       date: formatDate(point.startDate),
       icon: pointIconMap[point.type],
@@ -37,8 +44,7 @@ export default class ListPresenter extends Presenter {
       endTime: formatTime(point.endDate),
       endDate: '',
       basePrice: formatNumber(point.basePrice),
-      offers: offerGroup.items
-      // offers: offerGroup.items.map((value) => {})
+      offers: offerViewStates
     };
   }
 }
