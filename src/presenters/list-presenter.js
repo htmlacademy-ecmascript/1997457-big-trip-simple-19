@@ -11,11 +11,13 @@ export default class ListPresenter extends Presenter {
     super(...arguments);
 
     this.updateView();
+    this.pointsModel.addEventListener('filter', this.handlePointsModelFilter.bind(this));
   }
 
   updateView() {
     const points = this.pointsModel.list();
     const pointsViewStates = points.map(this.createPointViewState, this);
+
     this.view.setItems(pointsViewStates);
   }
 
@@ -47,4 +49,9 @@ export default class ListPresenter extends Presenter {
       offers: offerViewStates
     };
   }
+
+  handlePointsModelFilter() {
+    this.updateView();
+  }
 }
+// console.log(ListPresenter.prototype)
