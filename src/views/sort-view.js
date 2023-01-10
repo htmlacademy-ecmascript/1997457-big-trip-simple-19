@@ -11,7 +11,7 @@ export default class SortView extends RadioGroupView {
 
   /**
    * @param {OptionViewState} state
-   */
+  */
   createOptionHtml(state) {
     return html`
       <div class="trip-sort__item  trip-sort__item--${state.value}">

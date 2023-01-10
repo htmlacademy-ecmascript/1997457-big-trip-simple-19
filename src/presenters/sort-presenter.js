@@ -17,7 +17,6 @@ export default class SortPresenter extends Presenter {
     this.updateViewValue();
 
     this.view.addEventListener('change', this.handleViewChange.bind(this));
-    console.log(this);
   }
 
   updateViewValue() {
@@ -29,7 +28,6 @@ export default class SortPresenter extends Presenter {
 
   handleViewChange() {
     const sortType = this.view.getValue();
-    // console.log(filterType);
     this.pointsModel.setSort(sortCallbackMap[sortType]);
   }
 }
