@@ -59,7 +59,7 @@ const filterView = document.querySelector(String(FilterView));
 const sortView = document.querySelector(String(SortView));
 const NewPointButtonView = document.querySelector('.trip-main__event-add-btn');
 const listView = document.querySelector(String(ListView));
-const newPointEditorView = new NewPointEditorView();
+const newPointEditorView = new NewPointEditorView(listView);
 
 const {log, table} = console;
 
