@@ -9,6 +9,8 @@ export default class NewPointEditorPresenter extends Presenter {
 
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));
     this.view.addEventListener('reset', this.handleViewReset.bind(this));
+    // Не понятно как работает
+    this.view.addEventListener('close', this.handleViewClose.bind(this));
     // console.log(this);
   }
 
@@ -19,7 +21,7 @@ export default class NewPointEditorPresenter extends Presenter {
     if (this.location.pathname === '/new') {
       this.view.open();
     } else {
-      this.view.close();
+      this.view.close(false);
     }
   }
 
@@ -32,6 +34,10 @@ export default class NewPointEditorPresenter extends Presenter {
 
   handleViewReset() {
     this.view.close();
+    this.navigate('/');
+  }
+
+  handleViewClose() {
     this.navigate('/');
   }
 }
