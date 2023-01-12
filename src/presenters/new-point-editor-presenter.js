@@ -40,4 +40,5 @@ export default class NewPointEditorPresenter extends Presenter {
   handleViewClose() {
     this.navigate('/');
   }
+
 }
