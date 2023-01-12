@@ -7,9 +7,9 @@ export default class DestinationAdapter extends Adapter {
   constructor(data) {
     super();
 
-    this.numberId = String(data.id);
-    this.textDescription = data.description;
-    this.placeName = data.name;
-    this.placeImage = data.pictures.map((item) => ({...item}));
+    this.id = String(data.id);
+    this.description = data.description;
+    this.name = data.name;
+    this.pictures = data.pictures.map((item) => ({...item}));
   }
 }
