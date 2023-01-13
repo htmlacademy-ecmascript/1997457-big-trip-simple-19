@@ -14,11 +14,18 @@ export default class NewPointEditorView extends View {
   constructor(listView) {
     super();
 
+
     this.classList.add('trip-events__item');
     /**
      * @type {ListView}
-     */
+    */
     this.listView = listView;
+
+    // Вопрос: почему ищем PointTypeView через квери селектор???
+    /**
+     * @type {PointTypeView}
+    */
+    this.pointTypeView = this.querySelector(String(PointTypeView));
   }
 
   /**

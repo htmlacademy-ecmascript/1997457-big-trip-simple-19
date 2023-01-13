@@ -1,3 +1,4 @@
+import {pointTitleMap} from '../maps';
 import Presenter from './presenter';
 
 /**
@@ -7,11 +8,13 @@ export default class NewPointEditorPresenter extends Presenter {
   constructor() {
     super(...arguments);
 
+    const pointTypeOptions =
+      Object.entries(pointTitleMap).map(([key, value]) => ({value: key, title: value}));
+
+    this.view.pointTypeView.setOptions(pointTypeOptions);
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));
     this.view.addEventListener('reset', this.handleViewReset.bind(this));
-    // Не понятно как работает
     this.view.addEventListener('close', this.handleViewClose.bind(this));
-    // console.log(this);
   }
 
   /**
