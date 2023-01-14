@@ -12,8 +12,15 @@ export default class NewPointEditorPresenter extends Presenter {
     const pointTypeOptions =
       Object.entries(pointTitleMap).map(([key, value]) => ({value: key, title: value}));
 
+    const destinationOptions =
+      this.destinationsModel.listAll().map((item) => ({title: '', value: item.name}));
+    // console.log(destinationOptions);
+    // const destinationOptions =
+    // Object.entries(pointTitleMap).map(([key, value]) => ({value: key, title: value}));
+
     this.view.pointTypeView.setOptions(pointTypeOptions);
     this.view.pointTypeView.setValue(PointType.DRIVE);
+    this.view.destinationView.setOptions(destinationOptions);
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));
     this.view.addEventListener('reset', this.handleViewReset.bind(this));
     this.view.addEventListener('close', this.handleViewClose.bind(this));
