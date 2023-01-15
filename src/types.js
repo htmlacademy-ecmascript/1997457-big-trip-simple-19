@@ -109,3 +109,10 @@
  * @prop {string} value
  */
 
+/**
+ * @typedef OfferToggleViewState
+ * @prop {string} id
+ * @prop {string} title
+ * @prop {string} price
+ * @prop {boolean} checked
+ */
