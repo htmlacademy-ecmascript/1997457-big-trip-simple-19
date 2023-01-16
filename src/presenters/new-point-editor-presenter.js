@@ -1,3 +1,6 @@
+import {PointType} from '../enums';
+import {pointTitleMap} from '../maps';
+import {formatNumber} from '../utils';
 import Presenter from './presenter';
 
 /**
@@ -7,11 +10,52 @@ export default class NewPointEditorPresenter extends Presenter {
   constructor() {
     super(...arguments);
 
+    const pointTypeOptions =
+      Object.entries(pointTitleMap).map(([key, value]) => ({value: key, title: value}));
+
+    const destinationOptions =
+      this.destinationsModel.listAll().map((item) => ({title: '', value: item.name}));
+
+    this.view.pointTypeView.setOptions(pointTypeOptions);
+    this.view.addEventListener('change', this.handlePointTypeViewChange.bind(this));
+    this.view.destinationView.setOptions(destinationOptions);
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));
     this.view.addEventListener('reset', this.handleViewReset.bind(this));
-    // Не понятно как работает
     this.view.addEventListener('close', this.handleViewClose.bind(this));
-    // console.log(this);
+  }
+
+  /**
+   * @param{PointAdapter} point
+   */
+  updateView(point) {
+    const destination = this.destinationsModel.findById(point.destinationId);
+    this.view.pointTypeView.setValue(point.type);
+    this.view.destinationView.setLabel(pointTitleMap[point.type]);
+    this.view.destinationView.setValue(destination.name);
+    // console.log(point, 'point');
+    // console.log(point.offerIds, 'point.offerIds');
+
+    this.updateOffersView(point.offerIds);
+  }
+
+
+  /**
+   * @param {string[]} offerIds
+   */
+  updateOffersView(offerIds = []) {
+    const pointType = this.view.pointTypeView.getValue();
+    // console.log(pointType);
+    const offerGroup = this.offerGroupsModel.findById(pointType);
+    // console.log(offerGroup);
+
+    const options = offerGroup.items.map((offer) => ({
+      ...offer,
+      price: formatNumber(offer.price),
+      checked: offerIds.includes(offer.id)
+    }));
+
+    this.view.offersView.hidden = !options.length;
+    this.view.offersView.setOptions(options);
   }
 
   /**
@@ -19,7 +63,20 @@ export default class NewPointEditorPresenter extends Presenter {
    */
   handleNavigation() {
     if (this.location.pathname === '/new') {
+      const point = this.pointsModel.item();
+
+      point.type = PointType.BUS;
+      point.destinationId = this.destinationsModel.item(0).id;
+      point.startDate = new Date().toJSON();
+      point.endDate = point.startDate;
+      point.basePrice = 100;
+      // point.offerIds = ['1', '2'];
+
       this.view.open();
+
+
+      this.updateView(point);
+
     } else {
       this.view.close(false);
     }
@@ -39,6 +96,13 @@ export default class NewPointEditorPresenter extends Presenter {
 
   handleViewClose() {
     this.navigate('/');
+  }
+
+  handlePointTypeViewChange() {
+    const pointType = this.view.pointTypeView.getValue();
+
+    this.view.destinationView.setLabel(pointTitleMap[pointType]);
+    this.updateOffersView();
   }
 
 }
