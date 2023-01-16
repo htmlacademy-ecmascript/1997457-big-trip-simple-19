@@ -21,7 +21,6 @@ export default class NewPointEditorView extends View {
     */
     this.listView = listView;
 
-    // Вопрос: почему ищем PointTypeView через квери селектор???
     /**
      * @type {PointTypeView}
     */
@@ -36,6 +35,11 @@ export default class NewPointEditorView extends View {
      * @type {OffersView}
     */
     this.offersView = this.querySelector(String(OffersView));
+
+    /**
+     * @type {DestinationDetailsView} [destination]
+    */
+    this.destinationDetailsView = this.querySelector(String(DestinationDetailsView));
   }
 
   /**
