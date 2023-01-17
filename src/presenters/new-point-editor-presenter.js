@@ -24,8 +24,11 @@ export default class NewPointEditorPresenter extends Presenter {
 
     this.view.datesView.setConfig({
       // Формат даты по ТЗ
+      dateFormat: "d/m/y H:i",
       // Неделя начинается в понедельник
+
       // 24 часа вместо AM/PM
+      'time_24hr': true,
     });
 
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));

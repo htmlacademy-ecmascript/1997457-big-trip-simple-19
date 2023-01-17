@@ -31,6 +31,8 @@ export default class DatesView extends View {
 
     this.classList.add('event__field-group', 'event__field-group--time');
 
+    this.addEventListener('keydown', this.handleKeydown, true);
+
   }
 
 
@@ -52,12 +54,14 @@ export default class DatesView extends View {
    */
   setConfig(config) {
     const defaultConfig = {
-      allowInput: true,
       enableTime: true,
-      monthSelectorType: 'static'};
+      monthSelectorType: 'static',
+      static: true
+    };
 
     // @ts-ignore
     this.#startDateConfig = {
+      // Вопрос
       onChange: ([value]) => {this.#endDateCalendar.set('minDate', value)},
       ...defaultConfig,
       ...config
@@ -76,7 +80,7 @@ export default class DatesView extends View {
     this.#endDateCalendar = createCalendar(endDateView, this.#endDateConfig);
   }
 
-  // Вопрос, когда создается календарь
+  // Вопрос, когда создается календарь, при вызове свойства startDateCalendar и endDateCalendar?
 
   destroyCalendars() {
     this.#startDateCalendar?.destroy();
@@ -90,13 +94,24 @@ export default class DatesView extends View {
     const [startDate, endDate] = values;
     this.#startDateCalendar.setDate(startDate, true);
     this.#endDateCalendar.setDate(endDate);
-    
   }
 
   getValues() {
     return [
       this.#startDateCalendar.selectedDates[0]?.toJSON()
     ];
+  }
+
+  /**
+   * @param {KeyboardEvent} event
+   */
+  handleKeydown(event) {
+    if (event.key === 'Escape' && (this.#startDateCalendar.isOpen || this.#endDateCalendar.isOpen)) {
+      event.stopImmediatePropagation();
+
+      this.#startDateCalendar.close();
+      this.#endDateCalendar.close();
+    }
   }
 }
 
