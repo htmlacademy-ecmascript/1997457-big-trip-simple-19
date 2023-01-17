@@ -62,7 +62,7 @@ export default class DatesView extends View {
     // @ts-ignore
     this.#startDateConfig = {
       // Вопрос
-      onChange: ([value]) => {this.#endDateCalendar.set('minDate', value)},
+      onChange: ([value]) => this.#endDateCalendar.set('minDate', value),
       ...defaultConfig,
       ...config
     };
@@ -76,8 +76,10 @@ export default class DatesView extends View {
 
   createCalendars() {
     const [startDateView, endDateView] = this.querySelectorAll('input');
+
     this.#startDateCalendar = createCalendar(startDateView, this.#startDateConfig);
     this.#endDateCalendar = createCalendar(endDateView, this.#endDateConfig);
+    console.dir(this);
   }
 
   // Вопрос, когда создается календарь, при вызове свойства startDateCalendar и endDateCalendar?

@@ -110,8 +110,21 @@ export default class NewPointEditorPresenter extends Presenter {
   /**
    * @param {SubmitEvent} event
    */
-  handleViewSubmit(event) {
+  async handleViewSubmit(event) {
     event.preventDefault();
+
+    this.view.awaitSave(true);
+
+    try {
+      // собрать данные и передать
+    }
+
+    catch (exception) {
+      console.log(exception);
+      this.view.shake();
+    }
+
+    this.view.awaitSave(false);
   }
 
   handleViewReset() {
