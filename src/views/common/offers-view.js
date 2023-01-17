@@ -30,7 +30,7 @@ export default class OffersView extends View {
           id="event-offer-${state.id}"
           type="checkbox"
           name="offer"
-          value=""
+          value="${state.id}"
           ${state.checked ? 'checked' : ''}>
         <label class="event__offer-label" for="event-offer-${state.id}">
         <span class="event__offer-title">${state.title}</span>
@@ -48,6 +48,14 @@ export default class OffersView extends View {
     const optionsHtml = states.map(this.createOptionHtml).join('');
 
     this.querySelector('.event__available-offers').innerHTML = optionsHtml;
+  }
+
+  getValues() {
+    /**
+     * @type {NodeListOf<HTMLInputElement>}
+     */
+    const views = this.querySelectorAll(':checked');
+    return [...views].map((view) => view.value);
   }
 }
 

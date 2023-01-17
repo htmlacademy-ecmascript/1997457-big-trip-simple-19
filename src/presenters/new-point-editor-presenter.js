@@ -18,7 +18,10 @@ export default class NewPointEditorPresenter extends Presenter {
 
     this.view.pointTypeView.setOptions(pointTypeOptions);
     this.view.addEventListener('change', this.handlePointTypeViewChange.bind(this));
+
     this.view.destinationView.setOptions(destinationOptions);
+    this.view.destinationView.addEventListener('input', this.handleDestinationViewInput.bind(this));
+
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));
     this.view.addEventListener('reset', this.handleViewReset.bind(this));
     this.view.addEventListener('close', this.handleViewClose.bind(this));
@@ -36,6 +39,7 @@ export default class NewPointEditorPresenter extends Presenter {
     // console.log(point.offerIds, 'point.offerIds');
 
     this.updateOffersView(point.offerIds);
+    this.updateDestinationDetailsView(destination);
   }
 
 
@@ -44,9 +48,7 @@ export default class NewPointEditorPresenter extends Presenter {
    */
   updateOffersView(offerIds = []) {
     const pointType = this.view.pointTypeView.getValue();
-    // console.log(pointType);
     const offerGroup = this.offerGroupsModel.findById(pointType);
-    // console.log(offerGroup);
 
     const options = offerGroup.items.map((offer) => ({
       ...offer,
@@ -59,6 +61,17 @@ export default class NewPointEditorPresenter extends Presenter {
   }
 
   /**
+   * @param {DestinationAdapter} [destination]
+   */
+  updateDestinationDetailsView(destination) {
+    this.view.destinationDetailsView.hidden = !destination;
+
+    if (destination) {
+      this.view.destinationDetailsView.setContent(destination);
+    }
+  }
+
+  /**
    * @override
    */
   handleNavigation() {
@@ -66,11 +79,11 @@ export default class NewPointEditorPresenter extends Presenter {
       const point = this.pointsModel.item();
 
       point.type = PointType.BUS;
-      point.destinationId = this.destinationsModel.item(0).id;
+      point.destinationId = this.destinationsModel.item(9).id;
       point.startDate = new Date().toJSON();
       point.endDate = point.startDate;
       point.basePrice = 100;
-      // point.offerIds = ['1', '2'];
+      point.offerIds = ['1', '2'];
 
       this.view.open();
 
@@ -105,4 +118,10 @@ export default class NewPointEditorPresenter extends Presenter {
     this.updateOffersView();
   }
 
+  handleDestinationViewInput() {
+    const destinationName = this.view.destinationView.getValue();
+    const destination = this.destinationsModel.findBy('name', destinationName);
+
+    this.updateDestinationDetailsView(destination);
+  }
 }
