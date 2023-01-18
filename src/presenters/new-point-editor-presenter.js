@@ -23,11 +23,8 @@ export default class NewPointEditorPresenter extends Presenter {
     this.view.destinationView.addEventListener('input', this.handleDestinationViewInput.bind(this));
 
     this.view.datesView.setConfig({
-      // Формат даты по ТЗ
       dateFormat: "d/m/y H:i",
-      // Неделя начинается в понедельник
-
-      // 24 часа вместо AM/PM
+      locale: {firstDayOfWeek: 1},
       'time_24hr': true,
     });
 
@@ -47,8 +44,6 @@ export default class NewPointEditorPresenter extends Presenter {
     this.view.destinationView.setValue(destination.name);
     this.view.datesView.setValues([point.startDate, point.endDate]);
     this.view.basePriceView.setValue(point.basePrice);
-    // console.log(point, 'point');
-    // console.log(point.offerIds, 'point.offerIds');
 
     this.updateOffersView(point.offerIds);
     this.updateDestinationDetailsView(destination);
