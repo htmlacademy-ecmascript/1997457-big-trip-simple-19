@@ -69,8 +69,8 @@ export default class NewPointEditorView extends View {
           <${BasePriceView}></${BasePriceView}>
           <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
           <button class="event__reset-btn" type="reset">Cancel</button>
-          </header>
-          <section class="event__details">
+        </header>
+        <section class="event__details">
           <${OffersView}></${OffersView}>
           <${DestinationDetailsView}></${DestinationDetailsView}>
         </section>

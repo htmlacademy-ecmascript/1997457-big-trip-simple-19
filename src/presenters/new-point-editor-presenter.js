@@ -4,7 +4,8 @@ import {formatNumber} from '../utils';
 import Presenter from './presenter';
 
 /**
- * @extends {Presenter<NewPointEditorView>}
+ * @template {NewPointEditorView} View
+ * @extends {Presenter<View>}
  */
 export default class NewPointEditorPresenter extends Presenter {
   constructor() {
@@ -47,6 +48,7 @@ export default class NewPointEditorPresenter extends Presenter {
 
     this.updateOffersView(point.offerIds);
     this.updateDestinationDetailsView(destination);
+
   }
 
 
@@ -111,7 +113,22 @@ export default class NewPointEditorPresenter extends Presenter {
     this.view.awaitSave(true);
 
     try {
-      // собрать данные и передать
+      // собрать данные и передать в модель
+      const point = this.pointsModel.item();
+      const destinationName = this.view.destinationView.getValue();
+      const destination = this.destinationsModel.findBy('name', destinationName);
+      const [startDate, endDate] = this.view.datesView.getValues();
+
+      point.type = this.view.pointTypeView.getValue();
+      point.destinationId = destination?.id;
+      point.startDate = startDate;
+      point.endDate = endDate;
+      point.basePrice = this.view.basePriceView.getValue();
+      point.offerIds = this.view.offersView.getValues();
+
+      await this.pointsModel.add(point);
+
+      this.view.close();
     }
 
     catch (exception) {

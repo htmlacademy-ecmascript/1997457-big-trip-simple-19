@@ -100,7 +100,8 @@ export default class DatesView extends View {
 
   getValues() {
     return [
-      this.#startDateCalendar.selectedDates[0]?.toJSON()
+      this.#startDateCalendar.selectedDates[0]?.toJSON(),
+      this.#endDateCalendar.selectedDates[0]?.toJSON()
     ];
   }
 
