@@ -79,7 +79,7 @@ export default class DatesView extends View {
 
     this.#startDateCalendar = createCalendar(startDateView, this.#startDateConfig);
     this.#endDateCalendar = createCalendar(endDateView, this.#endDateConfig);
-    console.dir(this);
+    // console.dir(this);
   }
 
   // Вопрос, когда создается календарь, при вызове свойства startDateCalendar и endDateCalendar?

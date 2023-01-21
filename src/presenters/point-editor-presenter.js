@@ -7,7 +7,7 @@ import Presenter from './presenter';
 export default class PointEditorPresenter extends NewPointEditorPresenter {
   constructor() {
     super(...arguments);
-    console.log(this);
+    // console.log(this);
 
   }
 
@@ -16,5 +16,18 @@ export default class PointEditorPresenter extends NewPointEditorPresenter {
    */
   handleNavigation() {
     this.view.close(false);
+
+    if (this.location.pathname === '/edit') {
+      // console.log(this.location);
+      const pointId = this.location.searchParams.get('id');
+      console.log(pointId, 'pointId');
+      const point = this.pointsModel.findById(pointId);
+      console.log(point, 'point');
+
+      this.view.dataset.id = pointId;
+      this.view.open();
+      this.updateView(point);
+
+    }
   }
 }
