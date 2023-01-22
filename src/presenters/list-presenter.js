@@ -15,6 +15,8 @@ export default class ListPresenter extends Presenter {
     this.pointsModel.addEventListener('filter', this.handlePointsModelFilter.bind(this));
     this.pointsModel.addEventListener('sort', this.handlePointsModelSort.bind(this));
     this.pointsModel.addEventListener('add', this.handlePointsModelAdd.bind(this));
+    this.pointsModel.addEventListener('update', this.handlePointsModelUpdate.bind(this));
+
   }
 
   updateView() {
@@ -71,6 +73,10 @@ export default class ListPresenter extends Presenter {
    */
   handleViewEdit(event) {
     this.navigate('/edit', event.target.dataset);
+  }
+
+  handlePointsModelUpdate() {
+    this.updateView();
   }
 }
 // console.log(ListPresenter.prototype)

@@ -24,7 +24,7 @@ export default class NewPointEditorPresenter extends Presenter {
     this.view.destinationView.addEventListener('input', this.handleDestinationViewInput.bind(this));
 
     this.view.datesView.setConfig({
-      dateFormat: "d/m/y H:i",
+      dateFormat: 'd/m/y H:i',
       locale: {firstDayOfWeek: 1},
       'time_24hr': true,
     });
@@ -81,6 +81,13 @@ export default class NewPointEditorPresenter extends Presenter {
   }
 
   /**
+   * @param {PointAdapter} point
+   */
+  async save(point) {
+    await this.pointsModel.add(point);
+  }
+
+  /**
    * @override
    */
   handleNavigation() {
@@ -113,7 +120,6 @@ export default class NewPointEditorPresenter extends Presenter {
     this.view.awaitSave(true);
 
     try {
-      // собрать данные и передать в модель
       const point = this.pointsModel.item();
       const destinationName = this.view.destinationView.getValue();
       const destination = this.destinationsModel.findBy('name', destinationName);
@@ -126,20 +132,24 @@ export default class NewPointEditorPresenter extends Presenter {
       point.basePrice = this.view.basePriceView.getValue();
       point.offerIds = this.view.offersView.getValues();
 
-      await this.pointsModel.add(point);
+      await this.save(point);
+
 
       this.view.close();
     }
 
     catch (exception) {
-      console.log(exception);
       this.view.shake();
     }
 
     this.view.awaitSave(false);
   }
 
-  handleViewReset() {
+  /**
+   * @param {Event} event
+   */
+  handleViewReset(event) {
+    void event;
     this.view.close();
     this.navigate('/');
   }
