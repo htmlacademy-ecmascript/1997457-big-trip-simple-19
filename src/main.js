@@ -2,6 +2,7 @@ import FilterView from './views/filter-view';
 import SortView from './views/sort-view';
 import ListView from './views/list-view';
 import NewPointEditorView from './views/new-point-editor-view';
+import PointEditorView from './views/point-editor-view';
 import './views/point-view';
 import './presenters/list-presenter';
 
@@ -20,6 +21,7 @@ import SortPresenter from './presenters/sort-presenter';
 import ListPresenter from './presenters/list-presenter';
 import NewPointButtonPresenter from './presenters/new-point-button-presenter';
 import NewPointEditorPresenter from './presenters/new-point-editor-presenter';
+import PointEditorPresenter from './presenters/point-editor-presenter';
 
 const BASE = 'https://19.ecmascript.pages.academy/big-trip-simple';
 const AUTH = 'Basic roma1996sdsdsdsdsdsdsdsd7';
@@ -32,7 +34,7 @@ const pointsModel = new CollectionModel({
   store: pointsStore,
   adapt: (item) => new PointAdapter(item),
   filter: filterCallbackMap[FilterType.EVERYTHING],
-  sort: sortCallbackMap[SortType.PRICE]
+  sort: sortCallbackMap[SortType.DAY]
 });
 
 /**
@@ -57,9 +59,10 @@ const models = [pointsModel, destinationsModel, offerGroupsModel];
 
 const filterView = document.querySelector(String(FilterView));
 const sortView = document.querySelector(String(SortView));
-const NewPointButtonView = document.querySelector('.trip-main__event-add-btn');
+const newPointButtonView = document.querySelector('.trip-main__event-add-btn');
 const listView = document.querySelector(String(ListView));
 const newPointEditorView = new NewPointEditorView(listView);
+const pointEditorView = new PointEditorView(listView);
 
 const {log, table} = console;
 
@@ -71,9 +74,10 @@ Promise.all(
     // table(pointsModel.list());
     new FilterPresenter(filterView, models);
     new SortPresenter(sortView, models);
-    new NewPointButtonPresenter(NewPointButtonView, models);
-    new NewPointEditorPresenter(newPointEditorView, models);
     new ListPresenter(listView, models);
+    new NewPointButtonPresenter(newPointButtonView, models);
+    new NewPointEditorPresenter(newPointEditorView, models);
+    new PointEditorPresenter(pointEditorView, models);
   })
 
   .catch((error) => {

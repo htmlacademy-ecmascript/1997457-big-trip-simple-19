@@ -18,7 +18,6 @@ export default class FilterPresenter extends Presenter {
 
   updateViewValue() {
     const filter = this.pointsModel.getFilter();
-    // const filterType = Object.keys(filterCallbackMap).find((key) => filterCallbackMap[key] === filter);
     const filterType = findKey(filterCallbackMap, filter);
 
     this.view.setValue(filterType);
@@ -26,7 +25,8 @@ export default class FilterPresenter extends Presenter {
 
   handleViewChange() {
     const filterType = this.view.getValue();
-    // console.log(filterType);
+
+    this.navigate('/');
     this.pointsModel.setFilter(filterCallbackMap[filterType]);
   }
 }
