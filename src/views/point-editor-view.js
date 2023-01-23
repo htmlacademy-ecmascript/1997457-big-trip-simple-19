@@ -24,6 +24,7 @@ export default class PointEditorView extends NewPointEditorView {
     this.pointView = this.listView.findById(this.dataset.id);
     // console.log(this.pointView);
     // console.log(this, 'this');
+    // Вопрос
     this.pointView.replaceWith(this);
     // console.log(this);
   }
