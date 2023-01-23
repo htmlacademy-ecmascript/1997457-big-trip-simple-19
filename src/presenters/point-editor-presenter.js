@@ -39,11 +39,35 @@ export default class PointEditorPresenter extends NewPointEditorPresenter {
   }
 
   /**
+   * @param {PointAdapter} point
+   */
+  async delete(point) {
+    point.id = this.view.dataset.id;
+    // console.log(point.id);
+    await this.pointsModel.delete(point.id);
+  }
+
+  /**
    * @override
    * @param {Event} event
    */
   async handleViewReset(event) {
     // прописать удаление точки
+    // как save
     event.preventDefault();
+
+
+    this.view.awaitDelete(true);
+
+    try {
+      const point = this.pointsModel.item();
+      await this.delete(point);
+    }
+
+    catch (exception) {
+      this.view.shake();
+    }
+
+    this.view.awaitDelete(false);
   }
 }
