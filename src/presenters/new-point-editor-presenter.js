@@ -18,7 +18,7 @@ export default class NewPointEditorPresenter extends Presenter {
       this.destinationsModel.listAll().map((item) => ({title: '', value: item.name}));
 
     this.view.pointTypeView.setOptions(pointTypeOptions);
-    this.view.addEventListener('change', this.handlePointTypeViewChange.bind(this));
+    this.view.pointTypeView.addEventListener('change', this.handlePointTypeViewChange.bind(this));
 
     this.view.destinationView.setOptions(destinationOptions);
     this.view.destinationView.addEventListener('input', this.handleDestinationViewInput.bind(this));
@@ -50,7 +50,6 @@ export default class NewPointEditorPresenter extends Presenter {
     this.updateDestinationDetailsView(destination);
 
   }
-
 
   /**
    * @param {string[]} offerIds
@@ -140,6 +139,12 @@ export default class NewPointEditorPresenter extends Presenter {
 
     catch (exception) {
       this.view.shake();
+
+      if (exception.cause?.error) {
+        const [{fieldName}] = exception.cause.error;
+
+        this.view.findByName(fieldName)?.focus();
+      }
     }
 
     this.view.awaitSave(false);

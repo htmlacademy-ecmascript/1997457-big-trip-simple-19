@@ -15,11 +15,8 @@ export default class PointEditorPresenter extends NewPointEditorPresenter {
     this.view.close(false);
 
     if (this.location.pathname === '/edit') {
-      // console.log(this.location);
       const pointId = this.location.searchParams.get('id');
-      // console.log(pointId, 'pointId');
       const point = this.pointsModel.findById(pointId);
-      // console.log(point, 'point');
 
       this.view.dataset.id = pointId;
       this.view.open();
@@ -43,8 +40,6 @@ export default class PointEditorPresenter extends NewPointEditorPresenter {
    */
   async delete(point) {
     point.id = this.view.dataset.id;
-    // console.log(point.id);
-    await this.pointsModel.delete(point.id);
   }
 
   /**
@@ -52,16 +47,14 @@ export default class PointEditorPresenter extends NewPointEditorPresenter {
    * @param {Event} event
    */
   async handleViewReset(event) {
-    // прописать удаление точки
-    // как save
     event.preventDefault();
-
 
     this.view.awaitDelete(true);
 
     try {
-      const point = this.pointsModel.item();
-      await this.delete(point);
+      await this.pointsModel.delete(this.view.dataset.id);
+
+      this.view.close();
     }
 
     catch (exception) {
