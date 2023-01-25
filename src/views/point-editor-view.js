@@ -11,8 +11,8 @@ export default class PointEditorView extends NewPointEditorView {
     this.awaitDelete(false);
     this.querySelector('header').insertAdjacentHTML('beforeend', this.createCloseButtonHtml());
 
-    this.closeButton = this.querySelector('.event__rollup-btn');
-    this.closeButton.addEventListener('click', this.handleCloseButtonClick.bind(this));
+    // this.closeButton = this.querySelector('.event__rollup-btn');
+    this.addEventListener('click', this.handleClick);
   }
 
   /**
@@ -22,11 +22,7 @@ export default class PointEditorView extends NewPointEditorView {
     super.open();
 
     this.pointView = this.listView.findById(this.dataset.id);
-    // console.log(this.pointView);
-    // console.log(this, 'this');
-    // Вопрос
     this.pointView.replaceWith(this);
-    // console.log(this);
   }
 
   /**
@@ -58,8 +54,13 @@ export default class PointEditorView extends NewPointEditorView {
     this.uiBlockerView.toggle(flag);
   }
 
-  handleCloseButtonClick() {
-    this.close();
+  /**
+   * @param {MouseEvent & {target: Element}} event
+   */
+  handleClick(event) {
+    if(event.target.closest('.event__rollup-btn')) {
+      this.close();
+    }
   }
 }
 
