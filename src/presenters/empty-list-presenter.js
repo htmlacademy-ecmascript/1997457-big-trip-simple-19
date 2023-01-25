@@ -22,7 +22,6 @@ export default class EmptyListPresenter extends Presenter {
 
     this.view.hidden = (this.location.pathname === '/new') || Boolean(points.length);
     this.view.textContent = emptyListTitleMap[filterType];
-    console.log(this.view.textContent);
   }
 
   /**
