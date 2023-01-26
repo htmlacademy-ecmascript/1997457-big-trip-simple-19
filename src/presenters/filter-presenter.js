@@ -30,11 +30,8 @@ export default class FilterPresenter extends Presenter {
   }
 
   updateViewDisability() {
-    // this.view.hidden = !this.pointsModel.list().length;
     const filters = Object.values(filterCallbackMap);
-    // console.log(filters);
     const flags = filters.map((filter) => !this.pointsModel.list(filter).length);
-    // console.log(flags);
 
     this.view.setDisability(flags);
   }
