@@ -86,3 +86,4 @@ Promise.all(
   .catch((error) => {
     log(error);
   });
+
