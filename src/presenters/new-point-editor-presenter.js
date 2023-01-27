@@ -98,6 +98,7 @@ export default class NewPointEditorPresenter extends Presenter {
       point.startDate = new Date().toJSON();
       point.endDate = point.startDate;
       point.basePrice = 100;
+      point.offerIds = ['1', '2'];
 
       this.view.open();
 
