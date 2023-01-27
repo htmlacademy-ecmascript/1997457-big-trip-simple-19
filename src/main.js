@@ -66,14 +66,11 @@ const listView = document.querySelector(String(ListView));
 const newPointEditorView = new NewPointEditorView(listView);
 const pointEditorView = new PointEditorView(listView);
 
-const {log, table} = console;
-
 Promise.all(
   models.map((model) => model.ready())
 )
 
-  .then(async () => {
-    // table(pointsModel.list());
+  .then(() => {
     new FilterPresenter(filterView, models);
     new SortPresenter(sortView, models);
     new ListPresenter(listView, models);
@@ -83,7 +80,7 @@ Promise.all(
     new PointEditorPresenter(pointEditorView, models);
   })
 
-  .catch((error) => {
-    log(error);
+  .catch((exception) => {
+    emptyListView.textContent = exception;
   });
 

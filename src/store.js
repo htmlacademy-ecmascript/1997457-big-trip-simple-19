@@ -82,7 +82,8 @@ export default class Store {
       const message = `${response.status}. ${response.statusText}`;
 
       throw new Error(message, {
-        cause: await response.json});
+        cause: await response.json()
+      });
     }
   }
 
