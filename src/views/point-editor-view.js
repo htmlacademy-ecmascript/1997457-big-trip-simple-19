@@ -11,7 +11,6 @@ export default class PointEditorView extends NewPointEditorView {
     this.awaitDelete(false);
     this.querySelector('header').insertAdjacentHTML('beforeend', this.createCloseButtonHtml());
 
-    // this.closeButton = this.querySelector('.event__rollup-btn');
     this.addEventListener('click', this.handleClick);
   }
 
@@ -30,6 +29,7 @@ export default class PointEditorView extends NewPointEditorView {
    */
   close() {
     this.replaceWith(this.pointView);
+    this.fadeInLeft();
     this.pointView = null;
 
     super.close(...arguments);
