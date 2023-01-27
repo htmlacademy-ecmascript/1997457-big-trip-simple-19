@@ -6,8 +6,6 @@ import Presenter from './presenter';
 export default class NewPointButtonPresenter extends Presenter {
   constructor() {
     super(...arguments);
-    // console.log(this);
-
     this.view.addEventListener('click', this.handleViewClick.bind(this));
   }
 

@@ -17,7 +17,6 @@ export default class ListPresenter extends Presenter {
     this.pointsModel.addEventListener('add', this.handlePointsModelAdd.bind(this));
     this.pointsModel.addEventListener('update', this.handlePointsModelUpdate.bind(this));
     this.pointsModel.addEventListener('delete', this.handlePointsModelDelete.bind(this));
-
   }
 
   /**

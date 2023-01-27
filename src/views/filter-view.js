@@ -10,8 +10,7 @@ export default class FilterView extends RadioGroupView {
 
   /**
    * @param {OptionViewState} state
-  */
-  // Knowledge: списки чего-то надо начинать с метода для создания каждого пункта списка.
+   */
   createOptionHtml(state) {
     return html`
       <div class="trip-filters__filter">
