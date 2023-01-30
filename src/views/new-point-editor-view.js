@@ -17,7 +17,7 @@ export default class NewPointEditorView extends View {
     super();
 
 
-    this.classList.add('trip-events__item');
+    this.classList.add('trip-events__item', 'trip-events__item--edit');
     /**
      * @type {ListView}
     */
