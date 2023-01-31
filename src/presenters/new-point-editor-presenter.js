@@ -128,7 +128,6 @@ export default class NewPointEditorPresenter extends Presenter {
 
       await this.save(point);
 
-
       this.view.close();
     }
 
